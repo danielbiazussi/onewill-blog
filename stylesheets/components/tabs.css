@@ -6,12 +6,12 @@
   text-align: center;
 }
 
-.tabs__best {
-  padding-top: 50px;
-  font-size: 50px;
-  line-height: 65px;
-}
+  .tabs__best {
+    padding-top: 50px;
+    font-size: 50px;
+    line-height: 65px;
+  }
 
-.tabs__last {
-  font-family: 'Lora', sans-serif;
-}
+  .tabs__last {
+    font-family: 'Lora', sans-serif;
+  }

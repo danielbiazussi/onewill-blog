@@ -1,5 +1,6 @@
 /* Global */
-@import 'reset.css';
+@import 'common/reset.css';
+@import 'common/grid.css';
 
 /* Plugins */
 @import 'plugins/font-awesome/css/font-awesome.css';
@@ -8,6 +9,7 @@
 @import 'components/header.css';
 @import 'components/cover.css';
 @import 'components/tabs.css';
+@import 'components/posts.css';
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -23,7 +25,6 @@ body {
   margin: auto;
 }
 
-#page-wrapper{
-    height: 1000px;
-    width: 100%;
+.main-content {
+  margin-top: 100px;
 }
