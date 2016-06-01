@@ -1,0 +1,29 @@
+/* Global */
+@import 'reset.css';
+
+/* Plugins */
+@import 'plugins/font-awesome/css/font-awesome.css';
+
+/* Components */
+@import 'components/header.css';
+@import 'components/cover.css';
+@import 'components/tabs.css';
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 21px;
+  text-rendering: optimizeLegibility;
+}
+
+.wrapper {
+  width: 95%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+#page-wrapper{
+    height: 1000px;
+    width: 100%;
+}

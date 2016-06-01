@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>1Will</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="./stylesheets/main.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <div class="header">
+    <div class="wrapper">
+      <div class="header__title">
+        1Will
+      </div>
+      <div class="header__secondary">
+        <div class="header__secondary__title"></div>
+        <div class="header__secondary__actions">
+          <a>Categorias</a>
+          <a>Loja</a>
+        </div>
+      </div>
+      <div class="header__menu">
+        MENU <i class="fa fa-bars"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover">
+    <div class="cover__slogan">
+      <div class="cover__slogan-small">
+        O MELHOR LUGAR DA INTERNET PARA SE INFORMAR SOBRE:
+      </div>
+      <h1 class="cover__slogan-big">
+        Nutrição, Exercícios e Musculação
+      </h1>
+      <div class="cover__logo"></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <h1 class="tabs__best">Melhores Artigos</h1>
+    <div class="tabs__last">TROCAR PARA ÚLTIMOS ARTIGOS</div>
+  </div>
+
+  <div id="page-wrapper"></div>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+
+<script>
+  function init() {
+    window.addEventListener('scroll', function(e){
+      var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+          shrinkOn = 720,
+          header = $(".header");
+
+      if (distanceY > shrinkOn) {
+        header.addClass("header--changed");
+      } else {
+        header.removeClass("header--changed");
+      }
+    });
+  }
+
+  window.onload = init();
+</script>
