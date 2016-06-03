@@ -1,14 +1,6 @@
-.posts .post {
-  margin-bottom: 120px;
-}
-
-.posts-related .post-related {
-  margin-bottom: 30px;
-}
-
 .post {
   position: relative;
-  max-width: 520px
+  max-width: 520px;
 }
 
   .post__author-avatar {

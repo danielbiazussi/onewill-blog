@@ -1,4 +1,4 @@
-/* Global */
+/* Common */
 @import 'common/reset.css';
 @import 'common/grid.css';
 
@@ -9,7 +9,9 @@
 @import 'components/header.css';
 @import 'components/cover.css';
 @import 'components/tabs.css';
-@import 'components/posts.css';
+@import 'components/posts/post.css';
+@import 'components/posts/post-large.css';
+@import 'components/posts/posts.css';
 
 body {
   font-family: 'Open Sans', sans-serif;
