@@ -100,6 +100,38 @@ app.get('/post/:slug', (req, res) => {
         var reg = /\[image\]([\s\S]*)\[\/image\]/gm;
         templateString = templateString.replace(/\{\{image\}\}/gm, "/" + req.params.slug + "/" + reg.exec(postString)[1]);
 
+        // Tables
+        // TODO catch if none
+        var reg = /(\[table[^\]]*\](?:[^\[]*)\[\/\s*table\])/g;
+        // var tables = postString.match(reg);
+        postString = postString.replace(reg, (table) => {
+          var textParse = "";
+          var tableReg = /\[table\]([\s\S]*)\[\/table\]/gm;
+          table = tableReg.exec(table)[1];
+          table.split("\n").forEach((row, index) => {
+            if (row.length > 0) {
+              var tableRow = renderTemplate("text_table_row.html");
+              row.split("|").forEach((column, index2) => {
+                if (index2 == 0) {
+                  tableRow = tableRow.replace(`$${++index2}`, `/images/icon-power-${column}.svg`);
+                } else  {
+                  if (index2 == 2) {
+                    if (column > 0) {
+                      tableRow = tableRow.replace(`$${++index2}`, `/images/icon-up-${column}.svg`);
+                    } else {
+                      tableRow = tableRow.replace(`$${++index2}`, `/images/icon-down-${-column}.svg`);
+                    }
+                  } else {
+                    tableRow = tableRow.replace(`$${++index2}`, column);
+                  }
+                }
+              });
+              textParse += tableRow;
+            }
+          });
+          return renderTemplate("text_table.html").replace(/\{\{rows\}\}/gm, textParse);
+        });
+
         // Text
         var reg = /\[text\]([\s\S]*)\[\/text\]/gm;
         var text = reg.exec(postString)[1];
@@ -127,7 +159,7 @@ app.get('/post/:slug', (req, res) => {
         // Index
         var template = renderTemplate("text_index.html");
         var templateConcat = "";
-        headers.forEach(function(header, index) {
+        headers.forEach((header, index) => {
           templateConcat += template.repeat(1).replace("$1", "#" + index)
                                               .replace("$2", header)
                                               .replace("$3", ++index);

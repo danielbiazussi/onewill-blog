@@ -37,4 +37,12 @@ Anyway, in Java, if you're searching text for the those weird-named languages,
 you need to replace the \b with before and after whitespace and punctuation
 designators.
 
+[table]
+4|Swimming Performance|2|MODERATE|Appears to increase anaerobic cardiovascular capacity, not to a remarkable degree however.
+3|Lean Mass|1|LOW|Does appear to have inherent lean mass building properties, but a large amount of research is confounded with water weight gains (difficult to assess potency).
+4|Hydration|3|HIGH|No apparent influence on fasting blood glucose, but an 11-22% reduction in the postprandial spike.
+4|Creatinine|2|HIGH|There is limited evidence in favor of improvements in bone mineral density.
+1|Creatinine|-2|HIGH|There is limited evidence in favor of improvements in bone mineral density.
+[/table]
+
 [/text]
