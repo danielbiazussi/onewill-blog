@@ -42,7 +42,12 @@ app.get('/', (req, res) => {
           var templateString = fs.readFileSync(path + '/' + file).toString();
 
           var reg = /\[image\]([\s\S]*)\[\/image\]/gm;
-          var image = reg.exec(templateString)[1];
+          var image = reg.exec(templateString)[1]
+          if (/^https?:\/\/.*/.test(image)) {
+            image = image
+          } else {
+            image = "/" + req.params.slug + "/" + image;
+          }
 
           var reg = /\[title\]([\s\S]*)\[\/title\]/gm;
           var title = reg.exec(templateString)[1];
@@ -52,13 +57,13 @@ app.get('/', (req, res) => {
 
           var postItem = renderTemplate("post_item.html");
           textParse += postItem.replace("$1", "post/" + path.split("/")[path.split("/").length-1])
-                               .replace("$2", path.split("/")[path.split("/").length-1] + '/' + image)
+                               .replace("$2", image)
                                .replace("$3", title)
                                .replace("$4", call);
 
            var postItemRelated = renderTemplate("post_item_related.html");
            textParseRelated += postItemRelated.replace("$1", "post/" + path.split("/")[path.split("/").length-1])
-                                       .replace("$2", path.split("/")[path.split("/").length-1] + '/' + image)
+                                       .replace("$2", image)
                                        .replace("$3", title);
 
         }
