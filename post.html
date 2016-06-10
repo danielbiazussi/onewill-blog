@@ -4,7 +4,9 @@
 <head>
   <title>1Will</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="./stylesheets/main.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic' rel='stylesheet' type='text/css'>
 </head>
@@ -31,115 +33,32 @@
   <div class="post-large">
     <div class="wrapper">
       <h1 class="post-large__title">
-        Beta-Alanina
+        {{title}}
       </h1>
       <h4 class="post-large__subtitle">
-        Compilação de fatos, estudos científico e opiniões pela 1Will
+        {{subtitle}}
       </h4>
 
       <h3 class="post-large__tdlr">
-        - Útil para conseguir fazer 1 ou 2 repetições a mais, se você faz
-        series de 8-15. O que levaria a um estimulo maior do músculo, e isto
-        induz a melhor absorção de proteinas. Também te dá a sensação de ter mais energia.
+        {{call}}
       </h3>
     </div>
 
-    <div class="post-large__main-cover"></div>
+    <div class="post-large__main-cover" style="background-image: url({{image}})"></div>
 
     <div class="wrapper">
       <div class="post-large__index">
         <h3><span>Índice de Conteúdo<span></h3>
 
         <div class="post-large__index__items">
-          <div class="post-large__index__item">
-            <span>Resumo dos fatos</span>
-            <span>1</span>
-          </div>
-          <div class="post-large__index__item">
-            <span>Resumo das opiniões</span>
-            <span>2</span>
-          </div>
-          <div class="post-large__index__item">
-            <span>Consenso científico</span>
-            <span>3</span>
-          </div>
-          <div class="post-large__index__item">
-            <span>Efeito e magnitude de cada coisa no corpo humano</span>
-            <span>4</span>
-          </div>
-          <div class="post-large__index__item">
-            <span>Dúvidas e pontos a serem melhor pesquisados</span>
-            <span>5</span>
-          </div>
-          <div class="post-large__index__item">
-            <span>"Eu deveria usar?"- Pergunte a comunidade</span>
-            <span>6</span>
-          </div>
-          <div class="post-large__index__item">
-            <span>No final das contas, o que eu ganho com isso</span>
-            <span>7</span>
-          </div>
+          {{index}}
         </div>
       </div>
 
       <div class="post-large__text">
-        <h1>Resumo dos fatos</h1>
-        <p>
-          É para reduzir fadiga e aumentar o tabalho muscular total realizado.
-          Aumentar a performance na faixa de 60-240 segundos. Pode ajudar a ganhar
-          massa magra. Talvez anti-oxidate anti-veliche.
-        </p>
-        <p>
-          Consegue fazer uma ou duas series a mais, se você trabalha com repetição
-          de 8-15, consegueria fazer algo como 9-17.
-        </p>
-
-        <div class="post-large__table">
-          <div class="post-large__table__header row">
-            <h3 class="col-sm-15">Nível da evidência</h3>
-            <h3 class="col-sm-15">Quesito</h3>
-            <h3 class="col-sm-15">Magnitude</h3>
-            <h3 class="col-sm-15">Consistência dos resultados</h3>
-            <h3 class="col-sm-15">Comentários</h3>
-          </div>
-
-          <div class="post-large__table__row row">
-            <div class="col-sm-15">☐☑☑☑</div>
-            <div class="col-sm-15">Performance muscular</div>
-            <div class="col-sm-15">☐☐☑</div>
-            <div class="col-sm-15">Moderada</div>
-            <div class="col-sm-15">
-              Analise sugere um beneficio pequeno.
-            </div>
-          </div>
-
-          <div class="post-large__table__row row">
-            <div class="col-sm-15">☐☐☑☑</div>
-            <div class="col-sm-15">Performance muscular</div>
-            <div class="col-sm-15">☐☑☑</div>
-            <div class="col-sm-15">Moderada</div>
-            <div class="col-sm-15">
-              Analise sugere um beneficio pequeno.
-            </div>
-          </div>
-        </div>
-
-        <br>
-
-        <h1>Resumo das opiniões</h1>
-        <p>
-          É para reduzir fadiga e aumentar o tabalho muscular total realizado.
-          Aumentar a performance na faixa de 60-240 segundos. Pode ajudar a ganhar
-          massa magra. Talvez anti-oxidate anti-veliche.
-        </p>
-        <p>
-          Consegue fazer uma ou duas series a mais, se você trabalha com repetição
-          de 8-15, consegueria fazer algo como 9-17.
-        </p>
+        {{text}}
       </div>
     </div>
-
-    <img src="https://lh4.googleusercontent.com/-iYAFcoSWm9g/AAAAAAAAAAI/AAAAAAAAADs/n58AuwUgnW4/photo.jpg" />
   </div>
 </body>
 </html>

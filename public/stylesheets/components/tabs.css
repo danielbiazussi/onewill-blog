@@ -1,0 +1,17 @@
+.tabs {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  background-color: #E0E0E0;
+  text-align: center;
+}
+
+  .tabs__best {
+    padding-top: 50px;
+    font-size: 50px;
+    line-height: 65px;
+  }
+
+  .tabs__last {
+    font-family: 'Lora', sans-serif;
+  }
