@@ -98,14 +98,60 @@ app.get('/post/:slug', (req, res) => {
 
         // Image
         var reg = /\[image\]([\s\S]*)\[\/image\]/gm;
-        templateString = templateString.replace(/\{\{image\}\}/gm, "/" + req.params.slug + "/" + reg.exec(postString)[1]);
+        var image = reg.exec(postString)[1]
+        if (/^https?:\/\/.*/.test(image)) {
+          templateString = templateString.replace(/\{\{image\}\}/gm, image);
+        } else {
+          templateString = templateString.replace(/\{\{image\}\}/gm, "/" + req.params.slug + "/" + reg.exec(postString)[1]);
+        }
+
+        // Text
+        var reg = /\[text\]([\s\S]*)\[\/text\]/gm;
+        var text = reg.exec(postString)[1];
+        var temp = "";
+
+        var blocks = text.split(/(?=^#[^\n]*$)/gm); // Positive lookahead to keep delimiter
+        blocks.shift();
+
+        var textParse = "";
+        var headers = [];
+        for (var block of blocks) {
+          for (var paragraph of block.split(/\n\n/g)) {
+            var paragraphTrimmed = paragraph.trim();
+            if (paragraphTrimmed.length > 0) {
+              if (paragraph.charAt(0) == "#") {
+                headers.push(paragraph.substr(1));
+                var header = renderTemplate("text_header.html");
+                textParse += header.replace("$1", headers.length)
+                                   .replace("$2", paragraph.substr(1));
+              } else {
+                // Avoid wrapping custom elements with <p>
+                if (paragraphTrimmed.indexOf("[") == 0) {
+                  textParse += paragraph;
+                } else {
+                  var text = renderTemplate("text_paragraph.html");
+                  textParse += text.replace("$1", paragraph);
+                }
+              }
+            }
+          }
+        }
+
+        // Index
+        var template = renderTemplate("text_index.html");
+        var templateConcat = "";
+        headers.forEach((header, index) => {
+          templateConcat += template.repeat(1).replace("$1", "#" + index)
+                                              .replace("$2", header)
+                                              .replace("$3", ++index);
+        });
+
+        templateString = templateString.replace(/\{\{index\}\}/gm, templateConcat);
 
         // Tables
-        // TODO catch if none
-        var reg = /(\[table[^\]]*\](?:[^\[]*)\[\/\s*table\])/g;
-        // var tables = postString.match(reg);
-        postString = postString.replace(reg, (table) => {
-          var textParse = "";
+        var reg = /(\[table[^\]]*\](?:[^\[]*)\[\/table\])/g;
+        textParse = textParse.replace(reg, (table) => {
+          var rowConcat = "";
           var tableReg = /\[table\]([\s\S]*)\[\/table\]/gm;
           table = tableReg.exec(table)[1];
           table.split("\n").forEach((row, index) => {
@@ -126,52 +172,25 @@ app.get('/post/:slug', (req, res) => {
                   }
                 }
               });
-              textParse += tableRow;
+              rowConcat += tableRow;
             }
           });
-          return renderTemplate("text_table.html").replace(/\{\{rows\}\}/gm, textParse);
+          return renderTemplate("text_table.html").replace(/\{\{rows\}\}/gm, rowConcat);
         });
-
-        // Text
-        var reg = /\[text\]([\s\S]*)\[\/text\]/gm;
-        var text = reg.exec(postString)[1];
-        var temp = "";
-
-        var blocks = text.split(/(?=^#[^\n]*$)/gm); // Positive lookahead to keep delimiter
-        blocks.shift();
-
-        var textParse = "";
-        var headers = [];
-        for (var block of blocks) {
-          for (var paragraph of block.split(/\n\n/g)) {
-            if (paragraph.charAt(0) == "#") {
-              headers.push(paragraph.substr(1));
-              var header = renderTemplate("text_header.html");
-              textParse += header.replace("$1", headers.length)
-                                 .replace("$2", paragraph.substr(1));
-            } else {
-              var text = renderTemplate("text_paragraph.html");
-              textParse += text.replace("$1", paragraph);
-            }
-          }
-        }
-
-        // Index
-        var template = renderTemplate("text_index.html");
-        var templateConcat = "";
-        headers.forEach((header, index) => {
-          templateConcat += template.repeat(1).replace("$1", "#" + index)
-                                              .replace("$2", header)
-                                              .replace("$3", ++index);
-        });
-
-        templateString = templateString.replace(/\{\{index\}\}/gm, templateConcat);
 
         // Text Images
-        var reg = /\[text-image\]([\s\S]*)\[\/text-image\]/gm;
-        var template = renderTemplate("text_image.html");
-        textParse = textParse.replace(reg, template.replace("$1", `/${req.params.slug}/${reg.exec(textParse)[1]}`));
+        var reg = /(\[text-image[^\]]*\](?:[^\[]*)\[\/text-image\])/g;
+        textParse = textParse.replace(reg, (image) => {
+          var imageReg = /\[text-image\]([\s\S]*)\[\/text-image\]/gm;
+          image = imageReg.exec(image)[1];
+          if (/^https?:\/\/.*/.test(image)) {
+            return renderTemplate("text_image.html").replace("$1", image);
+          } else {
+            return renderTemplate("text_image.html").replace("$1", `/${req.params.slug}/${image}`);
+          }
+        });
 
+        // Append text
         templateString = templateString.replace(/\{\{text\}\}/gm, textParse);
         res.send(Handlebars.compile(templateString)());
       });
