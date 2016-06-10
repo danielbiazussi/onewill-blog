@@ -1,0 +1,40 @@
+[date]10/03/2016[/date]
+
+[title]Pelé ou Maradona?[/title]
+
+[call]Útil para conseguir fazer 1 ou 2 repetições a mais, se você faz
+series de 8-15. O que levaria a um estimulo maior do músculo, e isto induz a
+melhor absorção de proteinas. Também te dá a sensação de ter mais energia.
+[/call]
+
+[image]header.jpg[/image]
+
+[text]
+#Qual a importância desse no mundo?
+
+I believe that your problem is due to the fact that -
+is not a word character. Thus, the word boundary will match after the -,
+and so will not capture it. Word boundaries match before the first and after
+the last word characters in a string, as well as any place where before it is
+a word character or non-word character, and after it is the opposite.
+Also note that word boundary is a zero-width match.
+
+#Como fazer para contonar isso?
+
+Note: I'm not sure what to do about mistakes in text, like
+when someone doesn't put a space after a period at the end of a sentence.
+I allowed for it, but I'm not sure that it's necessarily the right thing to do.
+
+[text-image]header.jpg[/text-image]
+
+Anyway, in Java, if you're searching text for the those weird-named languages,
+you need to replace the \b with before and after whitespace and punctuation
+designators.
+
+#Massa hein, e agora?
+
+Anyway, in Java, if you're searching text for the those weird-named languages,
+you need to replace the \b with before and after whitespace and punctuation
+designators.
+
+[/text]

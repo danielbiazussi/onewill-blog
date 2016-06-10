@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {{> head}}
+</head>
+
+<body>
+  {{> header}}
+
+  <div class="post-large">
+    <div class="wrapper">
+      <h1 class="post-large__title">
+        {{title}}
+      </h1>
+      <h4 class="post-large__subtitle">
+        Compilação de fatos, estudos científico e opiniões pela 1Will
+      </h4>
+      <h3 class="post-large__tdlr">
+        - {{call}}
+      </h3>
+    </div>
+
+    <div class="post-large__main-cover" style="background-image: url({{image}})"></div>
+
+    <div class="wrapper">
+      <div class="post-large__index">
+        <h3><span>Índice de Conteúdo<span></h3>
+
+        <div class="post-large__index__items">
+          {{index}}
+        </div>
+      </div>
+
+      <div class="post-large__text">
+        {{text}}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
-var express = require('express');
-var packageInfo = require('./package.json');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const Handlebars = require('handlebars');
 const fs = require('fs');
 
 var app = express();
@@ -9,13 +9,75 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/posts'));
 
+// Register templates
+var partialsDir = __dirname + '/public/partials';
+var filenames = fs.readdirSync(partialsDir);
+
+filenames.forEach(function (filename) {
+  var matches = /^([^.]+).hbs$/.exec(filename);
+  if (!matches) {
+    return;
+  }
+  var name = matches[1];
+  var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+  Handlebars.registerPartial(name, template);
+});
+
+// Routes
 app.get('/', (req, res) => {
-  res.send('1Will Blog');
+  var renderTemplate = (filename) => {
+    return fs.readFileSync(__dirname + "/public/templates/" + filename).toString();
+  };
+
+  var textParse = "";
+  var textParseRelated = "";
+
+  var getFiles = (path, files) => {
+    fs.readdirSync(path).forEach((file) => {
+      var subpath = path + '/' + file;
+      if(fs.lstatSync(subpath).isDirectory()){
+        getFiles(subpath, files);
+      } else {
+        if (file.match(/\.txt$/)) {
+          var templateString = fs.readFileSync(path + '/' + file).toString();
+
+          var reg = /\[image\]([\s\S]*)\[\/image\]/gm;
+          var image = reg.exec(templateString)[1];
+
+          var reg = /\[title\]([\s\S]*)\[\/title\]/gm;
+          var title = reg.exec(templateString)[1];
+
+          var reg = /\[call\]([\s\S]*)\[\/call\]/gm;
+          var call = reg.exec(templateString)[1];
+
+          var postItem = renderTemplate("post_item.html");
+          textParse += postItem.replace("$1", "post/" + path.split("/")[path.split("/").length-1])
+                               .replace("$2", path.split("/")[path.split("/").length-1] + '/' + image)
+                               .replace("$3", title)
+                               .replace("$4", call);
+
+           var postItemRelated = renderTemplate("post_item_related.html");
+           textParseRelated += postItemRelated.replace("$1", "post/" + path.split("/")[path.split("/").length-1])
+                                       .replace("$2", path.split("/")[path.split("/").length-1] + '/' + image)
+                                       .replace("$3", title);
+
+        }
+      }
+    });
+  }
+
+  getFiles(__dirname + "/posts", []);
+
+  var templateString = fs.readFileSync(__dirname + "/public/views/home.html").toString();
+  templateString = templateString.replace(/\{\{posts\}\}/gm, textParse);
+  templateString = templateString.replace(/\{\{relateds\}\}/gm, textParseRelated);
+
+  res.send(Handlebars.compile(templateString)());
 });
 
 app.get('/post/:slug', (req, res) => {
   var renderTemplate = (filename) => {
-    return (__dirname + "/public/templates/" + filename).toString();
+    return fs.readFileSync(__dirname + "/public/templates/" + filename).toString();
   };
 
   fs.readFile(__dirname + "/posts/" + req.params.slug + '/text.txt', (err, post) => {
@@ -23,16 +85,12 @@ app.get('/post/:slug', (req, res) => {
       res.send('Post não encontrado');
     } else {
       var postString = post.toString();
-      fs.readFile(__dirname + "/post.html", (err, template) => {
+      fs.readFile(__dirname + "/public/views/post.html", (err, template) => {
         var templateString = template.toString();
 
         // Title
         var reg = /\[title\]([\s\S]*)\[\/title\]/gm;
         templateString = templateString.replace(/\{\{title\}\}/gm, reg.exec(postString)[1]);
-
-        // Subtitle
-        var reg = /\[subtitle\]([\s\S]*)\[\/subtitle\]/gm;
-        templateString = templateString.replace(/\{\{subtitle\}\}/gm, reg.exec(postString)[1]);
 
         // Call
         var reg = /\[call\]([\s\S]*)\[\/call\]/gm;
@@ -56,17 +114,18 @@ app.get('/post/:slug', (req, res) => {
           for (var paragraph of block.split(/\n\n/g)) {
             if (paragraph.charAt(0) == "#") {
               headers.push(paragraph.substr(1));
-              var header = fs.readFileSync(renderTemplate("text_header.html")).toString();
+              var header = renderTemplate("text_header.html");
               textParse += header.replace("$1", headers.length)
                                  .replace("$2", paragraph.substr(1));
             } else {
-              textParse += "<p>" + paragraph + "</p>";
+              var text = renderTemplate("text_paragraph.html");
+              textParse += text.replace("$1", paragraph);
             }
           }
         }
 
         // Index
-        var template = fs.readFileSync(renderTemplate("text_index.html")).toString();
+        var template = renderTemplate("text_index.html");
         var templateConcat = "";
         headers.forEach(function(header, index) {
           templateConcat += template.repeat(1).replace("$1", "#" + index)
@@ -78,11 +137,11 @@ app.get('/post/:slug', (req, res) => {
 
         // Text Images
         var reg = /\[text-image\]([\s\S]*)\[\/text-image\]/gm;
-        textParse = textParse.replace(reg, "<img src='" + "/" + req.params.slug + "/" + reg.exec(textParse)[1] + "'/>");
+        var template = renderTemplate("text_image.html");
+        textParse = textParse.replace(reg, template.replace("$1", `/${req.params.slug}/${reg.exec(textParse)[1]}`));
 
         templateString = templateString.replace(/\{\{text\}\}/gm, textParse);
-
-        res.send(templateString);
+        res.send(Handlebars.compile(templateString)());
       });
     }
   });

@@ -3,6 +3,10 @@
   max-width: 520px;
 }
 
+  .post a {
+    text-decoration: none;
+  }
+
   .post__author-avatar {
     position: absolute;
     left: 0;
@@ -28,7 +32,8 @@
       height: 280px;
       padding: 20px;
       border-radius: 3px;
-      background-color: #ccc;
+      background-color: #CCC;
+      background-size: cover;
       overflow: hidden;
 
       color: white;
@@ -73,6 +78,7 @@
     height: 180px;
     padding: 15px;
     border-radius: 3px;
+    background-size: cover;
     overflow: hidden;
 
     color: white;
@@ -92,6 +98,7 @@
     .post-related__content h4 {
       position: absolute;
       left: 0;
+      right: 0;
       bottom: 0;
       padding: 15px;
       line-height: 24px;
