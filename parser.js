@@ -125,11 +125,11 @@ var parsePost = (post, slug) => {
   templateString = Handlebars.compile(templateString)();
 
   // Do savings in background...
-  if (!directoryExistsSync(`${postsPath}/${slug}/cache`)) {
-    fs.mkdirSync(`${postsPath}/${slug}/cache`);
+  if (!directoryExistsSync(`${postsPath}/${slug}/.cache`)) {
+    fs.mkdirSync(`${postsPath}/${slug}/.cache`);
   }
 
-  fs.writeFile(`${postsPath}/${slug}/cache/post_cache.html`, templateString);
+  fs.writeFile(`${postsPath}/${slug}/.cache/post_cache.html`, templateString);
 
   var postItem = renderTemplate("post_item.html");
   postItem = postItem.replace("$1", `post/${slug}`)
@@ -137,14 +137,14 @@ var parsePost = (post, slug) => {
                      .replace("$3", title)
                      .replace("$4", call);
 
-  fs.writeFile(`${postsPath}/${slug}/cache/post_item_cache.html`, postItem);
+  fs.writeFile(`${postsPath}/${slug}/.cache/post_item_cache.html`, postItem);
 
    var postItemRelated = renderTemplate("post_item_related.html");
    postItemRelated = postItemRelated.replace("$1", `post/${slug}`)
                                .replace("$2", cover)
                                .replace("$3", title);
 
-  fs.writeFile(`${postsPath}/${slug}/cache/post_item_related_cache.html`, postItemRelated);
+  fs.writeFile(`${postsPath}/${slug}/.cache/post_item_related_cache.html`, postItemRelated);
 
   return templateString;
 }

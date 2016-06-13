@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
     fs.readdirSync(path).forEach((file) => {
       var subpath = path + '/' + file;
       if (fs.lstatSync(subpath).isDirectory()) {
-        if (subpath.split("/").pop() == "cache") {
+        if (subpath.split("/").pop() == ".cache") {
           textParse += fs.readFileSync(subpath + "/post_item_cache.html").toString();
           textParseRelated += fs.readFileSync(subpath + "/post_item_related_cache.html").toString();
         } else {
