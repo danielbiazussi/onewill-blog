@@ -21,7 +21,7 @@
       </h3>
     </div>
 
-    <div class="post-large__main-cover" style="background-image: url({{image}})"></div>
+    <div class="post-large__main-cover" style="background-image: url({{cover}})"></div>
 
     <div class="wrapper">
       <div class="post-large__index">
@@ -37,5 +37,21 @@
       </div>
     </div>
   </div>
+
+  <script>
+    var currentScroll = window.scrollY;
+    window.onscroll = function() {
+      if (window.scrollY > currentScroll) {
+        document.getElementsByClassName("header")[0].classList.add("header--hide");
+            currentScroll = window.scrollY;
+      } else {
+        if (currentScroll - window.scrollY > 100) {
+          document.getElementsByClassName("header")[0].classList.remove("header--hide");
+          currentScroll = window.scrollY;
+        }
+      }
+    };
+  </script>
+
 </body>
 </html>

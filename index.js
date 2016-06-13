@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Handlebars = require('handlebars');
 const fs = require('fs');
+const Handlebars = require('handlebars');
+const Parser = require('./parser');
 
 var app = express();
 
@@ -25,47 +26,18 @@ filenames.forEach(function (filename) {
 
 // Routes
 app.get('/', (req, res) => {
-  var renderTemplate = (filename) => {
-    return fs.readFileSync(__dirname + "/public/templates/" + filename).toString();
-  };
-
   var textParse = "";
   var textParseRelated = "";
 
   var getFiles = (path, files) => {
     fs.readdirSync(path).forEach((file) => {
       var subpath = path + '/' + file;
-      if(fs.lstatSync(subpath).isDirectory()){
-        getFiles(subpath, files);
-      } else {
-        if (file.match(/\.txt$/)) {
-          var templateString = fs.readFileSync(path + '/' + file).toString();
-
-          var reg = /\[image\]([\s\S]*)\[\/image\]/gm;
-          var image = reg.exec(templateString)[1]
-          if (/^https?:\/\/.*/.test(image)) {
-            image = image
-          } else {
-            image = "/" + req.params.slug + "/" + image;
-          }
-
-          var reg = /\[title\]([\s\S]*)\[\/title\]/gm;
-          var title = reg.exec(templateString)[1];
-
-          var reg = /\[call\]([\s\S]*)\[\/call\]/gm;
-          var call = reg.exec(templateString)[1];
-
-          var postItem = renderTemplate("post_item.html");
-          textParse += postItem.replace("$1", "post/" + path.split("/")[path.split("/").length-1])
-                               .replace("$2", image)
-                               .replace("$3", title)
-                               .replace("$4", call);
-
-           var postItemRelated = renderTemplate("post_item_related.html");
-           textParseRelated += postItemRelated.replace("$1", "post/" + path.split("/")[path.split("/").length-1])
-                                       .replace("$2", image)
-                                       .replace("$3", title);
-
+      if (fs.lstatSync(subpath).isDirectory()) {
+        if (subpath.split("/").pop() == "cache") {
+          textParse += fs.readFileSync(subpath + "/post_item_cache.html").toString();
+          textParseRelated += fs.readFileSync(subpath + "/post_item_related_cache.html").toString();
+        } else {
+          getFiles(subpath, files);
         }
       }
     });
@@ -81,123 +53,20 @@ app.get('/', (req, res) => {
 });
 
 app.get('/post/:slug', (req, res) => {
-  var renderTemplate = (filename) => {
-    return fs.readFileSync(__dirname + "/public/templates/" + filename).toString();
-  };
+  var postPath = __dirname + "/posts/" + req.params.slug + '/text.txt';
+  var postCachePath = __dirname + "/posts/" + req.params.slug + '/cache/post_cache.html';
 
-  fs.readFile(__dirname + "/posts/" + req.params.slug + '/text.txt', (err, post) => {
+  fs.readFile(postPath, (err, post) => {
     if (err) {
       res.send('Post não encontrado');
     } else {
-      var postString = post.toString();
-      fs.readFile(__dirname + "/public/views/post.html", (err, template) => {
-        var templateString = template.toString();
-
-        // Title
-        var reg = /\[title\]([\s\S]*)\[\/title\]/gm;
-        templateString = templateString.replace(/\{\{title\}\}/gm, reg.exec(postString)[1]);
-
-        // Call
-        var reg = /\[call\]([\s\S]*)\[\/call\]/gm;
-        templateString = templateString.replace(/\{\{call\}\}/gm, reg.exec(postString)[1]);
-
-        // Image
-        var reg = /\[image\]([\s\S]*)\[\/image\]/gm;
-        var image = reg.exec(postString)[1]
-        if (/^https?:\/\/.*/.test(image)) {
-          templateString = templateString.replace(/\{\{image\}\}/gm, image);
+      fs.readFile(postCachePath, (err, postCached) => {
+        if (err) {
+          res.send(Parser.parsePost(post, req.params.slug));
         } else {
-          templateString = templateString.replace(/\{\{image\}\}/gm, "/" + req.params.slug + "/" + reg.exec(postString)[1]);
+          res.send(postCached.toString());
+          Parser.parsePost(post, req.params.slug);
         }
-
-        // Text
-        var reg = /\[text\]([\s\S]*)\[\/text\]/gm;
-        var text = reg.exec(postString)[1];
-        var temp = "";
-
-        var blocks = text.split(/(?=^#[^\n]*$)/gm); // Positive lookahead to keep delimiter
-        blocks.shift();
-
-        var textParse = "";
-        var headers = [];
-        for (var block of blocks) {
-          for (var paragraph of block.split(/\n\n/g)) {
-            var paragraphTrimmed = paragraph.trim();
-            if (paragraphTrimmed.length > 0) {
-              if (paragraph.charAt(0) == "#") {
-                headers.push(paragraph.substr(1));
-                var header = renderTemplate("text_header.html");
-                textParse += header.replace("$1", headers.length)
-                                   .replace("$2", paragraph.substr(1));
-              } else {
-                // Avoid wrapping custom elements with <p>
-                if (paragraphTrimmed.indexOf("[") == 0) {
-                  textParse += paragraph;
-                } else {
-                  var text = renderTemplate("text_paragraph.html");
-                  textParse += text.replace("$1", paragraph);
-                }
-              }
-            }
-          }
-        }
-
-        // Index
-        var template = renderTemplate("text_index.html");
-        var templateConcat = "";
-        headers.forEach((header, index) => {
-          templateConcat += template.repeat(1).replace("$1", "#" + index)
-                                              .replace("$2", header)
-                                              .replace("$3", ++index);
-        });
-
-        templateString = templateString.replace(/\{\{index\}\}/gm, templateConcat);
-
-        // Tables
-        var reg = /(\[table[^\]]*\](?:[^\[]*)\[\/table\])/g;
-        textParse = textParse.replace(reg, (table) => {
-          var rowConcat = "";
-          var tableReg = /\[table\]([\s\S]*)\[\/table\]/gm;
-          table = tableReg.exec(table)[1];
-          table.split("\n").forEach((row, index) => {
-            if (row.length > 0) {
-              var tableRow = renderTemplate("text_table_row.html");
-              row.split("|").forEach((column, index2) => {
-                if (index2 == 0) {
-                  tableRow = tableRow.replace(`$${++index2}`, `/images/icon-power-${column}.svg`);
-                } else  {
-                  if (index2 == 2) {
-                    if (column > 0) {
-                      tableRow = tableRow.replace(`$${++index2}`, `/images/icon-up-${column}.svg`);
-                    } else {
-                      tableRow = tableRow.replace(`$${++index2}`, `/images/icon-down-${-column}.svg`);
-                    }
-                  } else {
-                    tableRow = tableRow.replace(`$${++index2}`, column);
-                  }
-                }
-              });
-              rowConcat += tableRow;
-            }
-          });
-          return renderTemplate("text_table.html").replace(/\{\{rows\}\}/gm, rowConcat);
-        });
-
-        // Text Images
-        var reg = /(\[text-image[^\]]*\](?:[^\[]*)\[\/text-image\])/g;
-        textParse = textParse.replace(reg, (image) => {
-          var imageReg = /\[text-image\]([\s\S]*)\[\/text-image\]/gm;
-          image = imageReg.exec(image)[1];
-          if (/^https?:\/\/.*/.test(image)) {
-            return renderTemplate("text_image.html").replace("$1", image);
-          } else {
-            return renderTemplate("text_image.html").replace("$1", `/${req.params.slug}/${image}`);
-          }
-        });
-
-        // Append text
-        templateString = templateString.replace(/\{\{text\}\}/gm, textParse);
-        res.send(Handlebars.compile(templateString)());
       });
     }
   });
