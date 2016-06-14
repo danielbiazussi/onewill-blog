@@ -3,6 +3,15 @@
 
 <head>
   {{> head}}
+
+  <meta name="description" content="{{call}}" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{title}}" />
+  <meta property="og:description" content="{{call}}" />
+  <meta property="og:url" content="{{url}}" />
+  <meta property="og:site_name" content="1Will Blog" />
+  <meta property="og:image" content="{{cover}}" />
 </head>
 
 <body>
@@ -38,8 +47,39 @@
     </div>
   </div>
 
+  {{studies}}
+
   <script>
     var currentScroll = window.scrollY;
+
+    (function() {
+      document.getElementsByClassName("header-js")[0].classList.add("header--changed");
+
+      window.addEventListener("click", function(event) {
+        if (event.target.nodeName != "A") {
+          document.body.classList.remove("fixed");
+
+          Array.prototype.slice.call(document.getElementsByClassName("modal-js")).forEach(function(modal) {
+            modal.classList.remove("modal--show");
+          });
+        }
+      });
+
+      Array.prototype.slice.call(document.getElementsByClassName("modal-js")).forEach(function(modal) {
+        modal.addEventListener('click', function(event) {
+          event.stopPropagation();
+        }, false);
+      });
+
+      Array.prototype.slice.call(document.getElementsByClassName("modal-see-js")).forEach(function(see) {
+        see.addEventListener('click', function(event) {
+          document.body.classList.add("fixed");
+          var modalId = event.target.getAttribute("modal-id");
+          document.getElementById("modal-" + modalId).classList.add("modal--show");
+        }, false);
+      });
+    })();
+
     window.onscroll = function() {
       if (window.scrollY > currentScroll) {
         document.getElementsByClassName("header")[0].classList.add("header--hide");

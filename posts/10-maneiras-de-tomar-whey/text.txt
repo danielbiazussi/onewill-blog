@@ -1,0 +1,14 @@
+[zombie]true[/zombie]
+[date]10/03/1990[/date]
+[votes]120[/votes]
+
+[title]10 Maneiras diferentes de se tomar whey![/title]
+
+[call]Útil para conseguir fazer 1 ou 2 repetições a mais, se você faz
+series de 8-15. O que levaria a um estimulo maior do músculo, e isto induz a
+melhor absorção de proteinas. Também te dá a sensação de ter mais energia.
+[/call]
+
+[cover]https://images.unsplash.com/photo-1447943549184-13f89172bcd4?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=188af0cb32fbdbc552c4667c2b9e9e35[/cover]
+
+[text][/text]

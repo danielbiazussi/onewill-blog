@@ -1,7 +1,7 @@
-<div class="header header--changed">
-  <div class="wrapper">
+<div class="header header-js">
+  <div class="wrapper clearfix">
     <div class="header__title">
-      1Will
+      {{> svg-logo-text}}
     </div>
     <div class="header__secondary">
       <a href="/"><div class="header__secondary__title"></div></a>
@@ -10,8 +10,8 @@
         <a>Loja</a>
       </div>
     </div>
-    <div class="header__menu">
-      Menu <i class="fa fa-angle-down" aria-hidden="true"></i>
-    </div>
+    <a class="header__menu">
+      <span>Menu</span> {{> svg-icon-arrow-down}}
+    </a>
   </div>
 </div>

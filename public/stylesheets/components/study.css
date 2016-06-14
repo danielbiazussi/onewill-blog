@@ -1,0 +1,45 @@
+.post__study {
+  max-width: 700px;
+  margin: auto;
+  padding-bottom: 100px;
+}
+
+.post__study h2 {
+  font-family: "Lora", serif;
+  margin-bottom: 40px;
+  line-height: 27px;
+}
+
+.post__study_r[hidden=true] {
+  display: none;
+}
+
+.post__study__content {
+  width: 90%;
+  margin: auto;
+}
+
+.post__study h2 a {
+  color: white;
+  text-decoration: underline;
+}
+
+.post__study__notes span {
+  display: block;
+  margin-top: 10px;
+  font-family: "Lora", serif;
+  font-style: italic;
+}
+
+.post__study__notes {
+  background-color: #47C9AF;
+  border-radius: 3px;
+  padding: 13px 20px;
+  margin-top: 30px;
+}
+
+table td {
+  padding: 12px;
+  border: 1px solid #666a6d;
+  font-size: 15px;
+}

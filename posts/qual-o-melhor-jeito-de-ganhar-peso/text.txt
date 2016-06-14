@@ -1,4 +1,5 @@
 [date]10/03/2016[/date]
+[votes]20[/votes]
 
 [title]Beta-Alanina[/title]
 
@@ -7,7 +8,7 @@ series de 8-15. O que levaria a um estimulo maior do músculo, e isto induz a
 melhor absorção de proteinas. Também te dá a sensação de ter mais energia.
 [/call]
 
-[cover]https://images.unsplash.com/photo-1458668383970-8ddd3927deed?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1e9d6264da3ae9cacdddcad3b63f3c04[/cover]
+[cover]https://images.unsplash.com/photo-1434608519344-49d77a699e1d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=eb4d7b20a09b911f0a0b6f2c08d0ab7e[/cover]
 
 [text]
 #It's hard to gauge time.
@@ -22,9 +23,10 @@ a word character or non-word character, and after it is the opposite.
 
 Also note that word boundary is a zero-width match.
 
-- Item
-- Item
-- Item
+- Word characters in a string, as well as any place where before it is.
+Word characters in a string, as well as any place where before it is
+- After it is the opposite
+- I just haven't had sex in a month. You know, you've been here two months.
 
 # I spent so much time making sweet
 
@@ -74,10 +76,9 @@ to be both engrossing and high-grossing! So we don't get dessert?
 
 <table>
 4|Swimming Performance|2|MODERATE|Appears to increase anaerobic cardiovascular capacity, not to a remarkable degree however.
-3|Lean Mass|1|LOW|Does appear to have inherent lean mass building properties, but a large amount of research is confounded with water weight gains (difficult to assess potency).
-4|Hydration|3|HIGH|No apparent influence on fasting blood glucose, but an 11-22% reduction in the postprandial spike.
-4|Creatinine|2|HIGH|There is **limited evidence** in favor of improvements in bone mineral density.
-1|Creatinine|-2|HIGH|There is limited evidence in favor of improvements in bone mineral density.
+1|Lean Mass|1|LOW|Does appear to have inherent lean mass building properties, but a large amount of research is confounded with water weight gains (difficult to assess potency).
+2|Hydration|3|HIGH|No apparent influence on fasting blood glucose, but an 11-22% reduction in the postprandial spike.
+4|Creatinine|-2|HIGH|There is **limited evidence** in favor of improvements in bone mineral density.
 </table>
 
 "Circumvent." It means "to go around." Gob: The old "reach around."

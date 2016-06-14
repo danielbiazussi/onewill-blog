@@ -13,11 +13,31 @@
 }
 
   .header--changed {
-      background-color: white;
-      color: black !important;
-      height: 60px;
-      line-height: 60px;
-      box-shadow: 0px 1px 0px 0px rgba(83,69,64,0.16), 0px 1px 2px 0px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.98);
+    color: black !important;
+    height: 60px;
+    line-height: 60px;
+    box-shadow: 0px 1px 0px 0px rgba(83,69,64,0.16), 0px 1px 2px 0px rgba(0,0,0,0.1);
+  }
+
+  .header--changed:before {
+    width: 90%;
+    opacity: 0;
+    content: " ";
+    right: -100px;
+    position: absolute;
+    height: 100%;
+    background-color: black;
+
+    -webkit-transition: all 0ms;
+    transition: all 0ms;
+  }
+
+  .header--changed:hover:before {
+    width: 100%;
+    opacity: 1;
+    -webkit-transition: all 130ms ease-in;
+    transition: all 130ms ease-in;
   }
 
   .header--hide {
@@ -29,22 +49,46 @@
   }
 
   .header__menu {
+    position: relative;
     float: right;
     text-transform: uppercase;
     color: #999;
+
+
+    display: none;
+
+    -webkit-transition: all 200ms;
+    transition: all 200ms;
   }
 
-    .header__menu-icon {
-      font-size: 20px;
-      margin-left: 15px;
+    .header__menu:hover {
+      text-decoration: none;
+      color: white;
     }
 
+    .header__menu span {
+      vertical-align: middle;
+    }
 
-  .header__title {
-    font-size: 30px;
-    display: inline-block;
-    vertical-align: top;
+    .header__menu svg {
+      width: 20px;
+      vertical-align: middle;
+      margin-left: 7px;
+    }
+
+      .header__menu svg path {
+        fill: #999;
+      }
+
+  .header__title svg {
+    width: 100px;
+    vertical-align: middle;
   }
+
+    .header__title svg path,
+    .header__title svg polygon {
+      fill: white;
+    }
 
   .header--changed .header__title {
     display: none;
@@ -86,8 +130,8 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/images/logo.png");
-  background-size: 55px;
+  background-image: url("/images/logo.svg");
+  background-size: 45px;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -100,7 +144,7 @@
   position: relative;
   width: 200px;
   height: 60px;
-  background-image: url(../../images/lift.gif);
+  background-image: url(../../images/lift-bw.gif);
   background-size: cover;
   background-position: 0px -15px;
   display: inline-block;
@@ -109,6 +153,12 @@
 .header__secondary__actions {
   display: inline-block;
   vertical-align: top;
+}
+
+@media (max-width: 768px) {
+  .header__secondary__actions {
+    display: none;
+  }
 }
 
   .header__secondary__actions a {
@@ -122,6 +172,5 @@
 
   .header__secondary__actions a:hover {
     color: white;
-    background-color: black;
     text-decoration: none;
   }

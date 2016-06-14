@@ -3,6 +3,15 @@
 
 <head>
   {{> head}}
+
+  <meta name="description" content="O melhor lugar da internet para se informar sobre: Nutrição, Exercícios e Musculação" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="1Will Blog" />
+  <meta property="og:description" content="O melhor lugar da internet para se informar sobre: Nutrição, Exercícios e Musculação" />
+  <meta property="og:url" content="http://blog.1will.com.br" />
+  <meta property="og:site_name" content="1Will Blog" />
+  <meta property="og:image" content="" />
 </head>
 
 <body>
@@ -20,13 +29,10 @@
     </div>
   </div>
 
-  <div class="tabs">
-    <h1 class="tabs__best">Melhores Artigos</h1>
-    <div class="tabs__last">TROCAR PARA ÚLTIMOS ARTIGOS</div>
-  </div>
+  {{tabs}}
 
   <div class="wrapper">
-    <div class="main-content clearfix">
+    <div id="posts" class="main-content clearfix">
       <div class="posts col-sm-8">
         {{posts}}
       </div>
@@ -44,19 +50,17 @@
 </body>
 </html>
 
-<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
-
 <script>
   function init() {
-    window.addEventListener('scroll', function(e){
+    window.addEventListener('scroll', function(event){
       var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-          shrinkOn = 720,
-          header = $(".header");
+          shrinkOn = 600,
+          header = document.getElementsByClassName("header")[0];
 
       if (distanceY > shrinkOn) {
-        header.addClass("header--changed");
+        header.classList.add("header--changed");
       } else {
-        header.removeClass("header--changed");
+        header.classList.remove("header--changed");
       }
     });
   }

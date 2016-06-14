@@ -1,14 +1,17 @@
 /* Common */
 @import 'common/reset.css';
 @import 'common/grid.css';
+@import 'common/animations.css';
+@import 'common/partials.css';
 
 /* Plugins */
-@import 'plugins/font-awesome/css/font-awesome.css';
 
 /* Components */
 @import 'components/header.css';
 @import 'components/cover.css';
 @import 'components/tabs.css';
+@import 'components/modal.css';
+@import 'components/study.css';
 @import 'components/posts/post.css';
 @import 'components/posts/post-large.css';
 @import 'components/posts/posts.css';
@@ -21,6 +24,22 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+  .fixed {
+    overflow: hidden;
+  }
+
+  .fixed .header {
+    display: none;
+  }
+
+  .fixed .post-large {
+    opacity: 0.2;
+  }
+
+a:hover {
+  color: black;
+}
+
 .wrapper {
   width: 95%;
   max-width: 1000px;
@@ -28,16 +47,5 @@ body {
 }
 
 .main-content {
-  margin-top: 100px;
-}
-
-.center {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  padding-top: 100px;
 }

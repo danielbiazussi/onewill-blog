@@ -1,0 +1,60 @@
+#Swimming Performance
+
+[title]
+Effects Of β-alanine Supplementation On Performance And Body
+Composition In Collegiate Wrestlers And Football Players
+[/title]
+
+[link]http://www.ncbi.nlm.nih.gov/pubmed/21407127[/link]
+
+[properties]
+Increase, Cohort, n/a, 37, n/a
+[/properties]
+
+[notes]4 g/day improved performance (shuttle run, flexed-arm hang) and body composition.[/notes]
+
+---
+
+[title]
+Effects Of 28 Days Of Beta-alanine And Creatine Monohydrate Supplementation On Aerobic Power,
+Ventilatory And Lactate Thresholds, And Time To Exhaustion
+[/title]
+
+[link]http://www.ncbi.nlm.nih.gov/pubmed/21407127[/link]
+
+[properties]
+Increase, Cohort, n/a, 37, n/a
+[/properties]
+
+[notes]4 g/day improved performance (shuttle run, flexed-arm hang) and body composition.[/notes]
+
+#Lean Mass
+
+[title]Effects Of β-alanine Supplementation On Exercise Performance: A Meta-analysis[/title]
+
+[properties]
+Increase, Cohort, n/a, 37, n/a
+[/properties]
+
+[link]http://www.ncbi.nlm.nih.gov/pubmed/21407127[/link]
+
+[notes]
+This meta-analysis found good evidence for a median 2.85%
+increase in muscular endurance during exercises lasting 60-240 s.
+Benefits decreased over that range and were not significant below..
+[/notes]
+
+#Creatinine
+
+[title]
+Effects Of 28 Days Of Beta-alanine And Creatine Monohydrate Supplementation On Aerobic Power,
+Ventilatory And Lactate Thresholds, And Time To Exhaustion
+[/title]
+
+[link]http://www.ncbi.nlm.nih.gov/pubmed/21407127[/link]
+
+[properties]
+Increase, Cohort, n/a, 37, n/a
+[/properties]
+
+[notes]4 g/day improved performance (shuttle run, flexed-arm hang) and body composition.[/notes]

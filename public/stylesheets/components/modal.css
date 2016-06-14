@@ -1,0 +1,33 @@
+.modal {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  padding: 60px 0;
+  /*background-color: rgba(59, 60, 61, 0.97);*/
+  background-color: rgba(0, 0, 0, 0.90);
+  box-shadow: 1px 1px 39px 3px rgba(0, 0, 0, 0.45);
+  color: #FFF;
+  z-index: 1;
+  overflow-y: auto;
+
+  border-radius: 3px;
+
+  display: none;
+
+  -webkit-font-smoothing: antialiased;
+
+  -webkit-transform: scale(0.2);
+      transform: translate(0.2);
+
+  -webkit-animation: zoom .5s ease-in forwards;
+  -moz-animation: zoom .5s ease-in forwards;
+  -ms-animation: zoom .5s ease-in forwards;
+   -o-animation: zoom .5s ease-in forwards;
+      animation: zoom .5s ease-in forwards;
+}
+
+  .modal--show {
+    display: block;
+  }

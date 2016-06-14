@@ -1,21 +1,35 @@
 .cover {
   position: relative;
-  background-image: url("../../images/cover.jpeg");
+  /*background-image: url("../../images/cover.jpeg");*/
+  background-image: url(https://images.unsplash.com/photo-1438893761775-f1db119d27b2?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=0b878bd6233d596aca1ad93c6900d9f8);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 700px;
 }
+
+  .cover:before {
+    width: 100%;
+    height: 100%;
+    content: " ";
+    position: absolute;
+    /*background-color: rgba(0, 0, 0, 0.38);*/
+    background-color: rgba(80, 70, 70, 0.63);
+    top: 0;
+  }
+
   .cover__slogan {
+    position: relative;
     max-width: 800px;
     margin: auto;
     padding: 250px 0 50px 0;
     color: white;
+    word-wrap: break-word;
     text-align: center;
     -webkit-font-smoothing: antialiased;
   }
     .cover__slogan-small {
-      font-family: 'Lora', sans-serif;
+      font-family: 'Lora', serif;
       font-size: 17px;
       letter-spacing: 1px;
     }
@@ -31,16 +45,11 @@
   height: 100px;
   margin: 100px auto 0 auto;
 
-  background-image: url("http://scontent.cdninstagram.com/t51.2885-19/s150x150/1169013_1493670457609407_834507283_a.jpg");
+  background-image: url("../../images/logo.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 65%;
 
   border-radius: 50%;
-  border: solid 5px transparent;
-  box-shadow: 0 0 0 3px white;
-
-  background-clip: padding-box;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding;
+  border: 3px solid white;
 }

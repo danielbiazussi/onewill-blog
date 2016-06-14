@@ -11,7 +11,7 @@
             <mask id="mask-2" fill="white">
                 <use xlink:href="#path-1"></use>
             </mask>
-            <use id="Mask" fill="#4990E2" xlink:href="#path-1"></use>
+            <use id="Mask" fill="#41E1FF" xlink:href="#path-1"></use>
             <rect id="Rectangle" fill="#D9D9D9" mask="url(#mask-2)" x="6" y="-1" width="17.1340991" height="6"></rect>
         </g>
     </g>
