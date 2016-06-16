@@ -1,3 +1,5 @@
+env = process.env.NODE_ENV || "development";
+
 express = require('express');
 bodyParser = require('body-parser');
 fs = require('fs');
@@ -112,7 +114,7 @@ var server = app.listen(process.env.PORT, () => {
   var host = server.address().address;
   var port = server.address().port;
 
-  if (process.env.ENV_VARIABLE == "production") {
+  if (env == "production") {
     domain = "blog.1will.com.br";
   } else {
     domain = `localhost:${port}`;
