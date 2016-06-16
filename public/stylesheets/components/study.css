@@ -32,7 +32,7 @@
 }
 
 .post__study__notes {
-  background-color: #47C9AF;
+  background-color: #2a78af;
   border-radius: 3px;
   padding: 13px 20px;
   margin-top: 30px;
@@ -40,6 +40,6 @@
 
 table td {
   padding: 12px;
-  border: 1px solid #666a6d;
+  border: 2px solid #56a2d8;
   font-size: 15px;
 }

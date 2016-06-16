@@ -54,7 +54,7 @@ var parseStudies = (slug, rowName) => {
         count++;
       });
 
-      var templateString = renderTemplate("post_studies.html");
+      var templateString = renderTemplate("post_studies.hbs");
       templateString = templateString.replace("$1", ++index);
       studies = templateString.replace(/\{\{studies\}\}/gm, studies);
     }
@@ -240,9 +240,9 @@ var parsePost = (post, slug) => {
   fs.writeFile(`${postsPath}/${slug}/.cache/post_item_related_cache.html`, postItemRelated);
 
   if (zombie) {
-    return renderTemplate("post_zombie.html");
+    return { post: renderTemplate("post_zombie.html"), postItem: postItem, postItemRelated: postItemRelated };
   } else {
-    return templateString;
+    return { post: templateString, postItem: postItem, postItemRelated: postItemRelated };
   }
 }
 

@@ -11,7 +11,7 @@
   <meta property="og:description" content="{{call}}" />
   <meta property="og:url" content="{{url}}" />
   <meta property="og:site_name" content="1Will Blog" />
-  <meta property="og:image" content="{{cover}}" />
+  <meta property="og:image" content="https://process.filestackapi.com/AV0jeucXSwuibGqPRbugyz/resize=width:600/{{cover}}" />
 </head>
 
 <body>
@@ -63,6 +63,18 @@
             modal.classList.remove("modal--show");
           });
         }
+      });
+
+      Array.prototype.slice.call(document.getElementsByClassName("modal-close-js")).forEach(function(modalClose) {
+        modalClose.addEventListener('click', function(event) {
+          Array.prototype.slice.call(document.getElementsByClassName("modal-js")).forEach(function(modal) {
+            document.body.classList.remove("fixed");
+
+            Array.prototype.slice.call(document.getElementsByClassName("modal-js")).forEach(function(modal) {
+              modal.classList.remove("modal--show");
+            });
+          });
+        }, false);
       });
 
       Array.prototype.slice.call(document.getElementsByClassName("modal-js")).forEach(function(modal) {

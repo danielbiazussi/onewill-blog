@@ -4,13 +4,10 @@
   left: 10%;
   right: 10%;
   bottom: 10%;
-  padding: 60px 0;
-  /*background-color: rgba(59, 60, 61, 0.97);*/
-  background-color: rgba(0, 0, 0, 0.90);
-  box-shadow: 1px 1px 39px 3px rgba(0, 0, 0, 0.45);
+  background-color: #018fE0;
+  box-shadow: 1px 1px 39px 3px #b2cede;
   color: #FFF;
   z-index: 1;
-  overflow-y: auto;
 
   border-radius: 3px;
 
@@ -19,15 +16,52 @@
   -webkit-font-smoothing: antialiased;
 
   -webkit-transform: scale(0.2);
-      transform: translate(0.2);
+          transform: translate(0.2);
 
   -webkit-animation: zoom .5s ease-in forwards;
-  -moz-animation: zoom .5s ease-in forwards;
-  -ms-animation: zoom .5s ease-in forwards;
-   -o-animation: zoom .5s ease-in forwards;
-      animation: zoom .5s ease-in forwards;
+          animation: zoom .5s ease-in forwards;
 }
+
+  .modal__inner {
+    padding: 20px 0;
+    overflow-y: auto;
+    height: 100%;
+  }
 
   .modal--show {
     display: block;
   }
+
+  .modal svg {
+    position: fixed;
+    width: 30px;
+    height: auto;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+
+    -webkit-transition: all 150ms;
+    transition: all 150ms;
+  }
+
+    .modal svg:hover {
+      width: 35px;
+      right: 17px;
+      top: 17px;
+    }
+
+    .modal svg:hover circle {
+      fill-opacity: 1;
+    }
+
+    .modal svg:hover polygon {
+      fill: #018fE0;
+    }
+
+    .modal svg path,
+    .modal svg polygon {
+      fill: white;
+
+      -webkit-transition: fill 300ms;
+      transition: fill 300ms;
+    }

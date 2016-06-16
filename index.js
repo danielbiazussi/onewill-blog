@@ -24,10 +24,15 @@ app.get('/:sort?', (req, res) => {
     fs.readdirSync(path).forEach((file) => {
       var subpath = path + '/' + file;
       if (fs.lstatSync(subpath).isDirectory()) {
-        if (subpath.split("/").pop() == ".cache") {
+        getFiles(subpath, files);
+      } else {
+        if (file == "text.txt") {
           var subpath2 = subpath.split("/");
           subpath2.pop();
-          var postTemplate = fs.readFileSync(subpath2.join("/") + '/text.txt').toString();
+          var slug = subpath2.pop();
+
+          var postTemplate = fs.readFileSync(subpath).toString();
+          var postParsed = Parser.parsePost(postTemplate, slug);
 
           // Date
           var reg = /\[date\]([\s\S]*)\[\/date\]/gm;
@@ -40,15 +45,13 @@ app.get('/:sort?', (req, res) => {
           postsSort.push({
             date: date,
             votes: votes,
-            text: fs.readFileSync(subpath + "/post_item_cache.html").toString()
+            text: postParsed["postItem"]
           });
 
           postsRelatedSort.push({
             votes: votes,
-            text: fs.readFileSync(subpath + "/post_item_related_cache.html").toString()
+            text: postParsed["postItemRelated"]
           });
-        } else {
-          getFiles(subpath, files);
         }
       }
     });
@@ -95,7 +98,7 @@ app.get('/post/:slug', (req, res) => {
     } else {
       fs.readFile(postCachePath, (err, postCached) => {
         if (err) {
-          res.send(Parser.parsePost(post, req.params.slug));
+          res.send(Parser.parsePost(post, req.params.slug)["post"]);
         } else {
           res.send(postCached.toString());
           Parser.parsePost(post, req.params.slug);
