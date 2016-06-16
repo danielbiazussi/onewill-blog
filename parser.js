@@ -269,7 +269,7 @@ var imageSrc = (image, slug) => {
   if (/^https?:\/\/.*/.test(image)) {
     return `${image}`;
   } else {
-    return `${domain}/${slug}/${image}`;
+    return `${domain}/${slug}/images/${image}`;
   }
 }
 
