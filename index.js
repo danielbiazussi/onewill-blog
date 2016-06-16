@@ -112,5 +112,7 @@ var server = app.listen(process.env.PORT, () => {
   var host = server.address().address;
   var port = server.address().port;
 
+  domain = `http://${host}:${port}`;
+
   console.log('Web server started at http://%s:%s', host, port);
 });

@@ -96,7 +96,7 @@ var parsePost = (post, slug) => {
   var reg = /\[cover\]([\s\S]*)\[\/cover\]/gm;
   var cover = reg.exec(postString)[1]
   if (/^https?:\/\/.*/.test(cover)) {
-    templateString = templateString.replace(/\{\{cover\}\}/gm, cover);
+    templateString = templateString.replace(/\{\{cover\}\}/gm, domain + cover);
   } else {
     templateString = templateString.replace(/\{\{cover\}\}/gm, `/${slug}/${reg.exec(postString)[1]}`);
   }
@@ -202,7 +202,7 @@ var parsePost = (post, slug) => {
     var imageReg = /<image>([\s\S]*)<\/image>/gm;
     image = imageReg.exec(image)[1];
     if (/^https?:\/\/.*/.test(image)) {
-      return renderTemplate("text_image.html").replace("$1", image);
+      return renderTemplate("text_image.html").replace("$1", domain + image);
     } else {
       return renderTemplate("text_image.html").replace("$1", `/${slug}/${image}`);
     }
