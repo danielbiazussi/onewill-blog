@@ -1,7 +1,7 @@
 # onewill-blog
 
 #### How to create a post:
-- Create a directory with the post [slug](https://en.wikipedia.org/wiki/Slug_(publishing)) inside `path/to/posts` folder. 
+- Create a directory with the post [slug](https://en.wikipedia.org/wiki/Slug_(publishing)) inside `path/to/posts` folder.
   - e.g. `/posts/how-to-gain-huge-mass-only-in-front-of-pc`
 - To start writing the post content, first create a file named `text.txt`.
 - Any image that want to use and it is local, create a `/images` folder and drag them inside.
@@ -28,7 +28,7 @@ Post markup:
 ^ Defines the title
 [title]How to gain huge mass only in front of pc[/title]
 
-^ Defines the excerpt 
+^ Defines the excerpt
 [call]More and more people spend hours a day in front of pc and don't have time for exercices.[/call]
 
 ^ Defines the post image representation
@@ -115,6 +115,8 @@ Increase, Cohort, n/a, 37, n/a
 ...
 
 ```
+
+#### Examples of this can be found inside [/examples/post-normal](examples)
 
 #### Extras:
 In [text][/text] tag, you can define [https://guides.github.com/features/mastering-markdown/](markdown sintax to achieve text styles
