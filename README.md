@@ -116,7 +116,7 @@ Increase, Cohort, n/a, 37, n/a
 
 ```
 
-#### Examples of this can be found inside [/examples/post-normal](examples)
+#### Examples of this can be found inside [/examples](examples)
 
 #### Extras:
 In [text][/text] tag, you can define [https://guides.github.com/features/mastering-markdown/](markdown sintax to achieve text styles
