@@ -243,7 +243,7 @@ var parsePost = (post, slug) => {
 
 var imageLarge = (image, slug) => {
   if (env == "production") {
-    return `${imageRemote}/resize=width:2000,fit:max/output=compress:true,quality:99/${imageSrc(image, slug)}`
+    return `${imageRemote}/resize=width:2000,fit:max/output=compress:true,quality:95/cache=expiry:86400/${imageSrc(image, slug)}`
   } else {
     return imageSrc(image, slug);
   }
@@ -251,7 +251,7 @@ var imageLarge = (image, slug) => {
 
 var imageMedium = (image, slug) => {
   if (env == "production") {
-    return `${imageRemote}/resize=width:1200,fit:max/output=compress:true,quality:99/${imageSrc(image, slug)}`
+    return `${imageRemote}/resize=width:1200,fit:max/output=compress:true,quality:95/cache=expiry:86400/${imageSrc(image, slug)}`
   } else {
     return imageSrc(image, slug);
   }
@@ -259,7 +259,7 @@ var imageMedium = (image, slug) => {
 
 var imageSmall = (image, slug) => {
   if (env == "production") {
-    return `${imageRemote}/resize=width:800/sharpen=amount:1/${imageSrc(image, slug)}`
+    return `${imageRemote}/resize=width:800/sharpen=amount:1/cache=expiry:86400/${imageSrc(image, slug)}`
   } else {
     return imageSrc(image, slug);
   }
