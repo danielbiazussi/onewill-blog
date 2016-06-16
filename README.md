@@ -3,8 +3,8 @@
 #### How to create a post:
 - Create a directory with the post [slug](https://en.wikipedia.org/wiki/Slug_(publishing)) inside `path/to/posts` folder.
   - e.g. `/posts/how-to-gain-huge-mass-only-in-front-of-pc`
-- To start writing the post content, first create a file named `text.txt`.
-- Any image that want to use and it is local, create a `/images` folder and drag them inside.
+- To start writing the post content, first create a file named `text.txt` inside of it.
+- Any image that want to use and that is local, create a `/images` folder and drag them inside.
 - To add studies text reference for the post, create a file named `studies.txt`.
 
 Tree representation:
@@ -17,7 +17,7 @@ Tree representation:
 │   │   │   └── muscle.jpg
 ```
 
-Post markup:
+#### Post markup:
 ```
 ^ Defines the publishing date
 [date]10/03/2016[/date]
@@ -61,7 +61,7 @@ This text is for section 2.
 
 ### Studies
 
-#### [table] markup
+#### Table markup (<table>)
 
 The table markup gets the following sintax:
 ```
@@ -86,7 +86,7 @@ E.g.:
 </table>
 ```
 
-#### studies.txt
+#### Studies markup (/studies.txt)
 To link each row to a group of studies, this file should define the studies for all rows in the following sintax:
 
 ```
