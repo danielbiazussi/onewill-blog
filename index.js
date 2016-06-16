@@ -112,7 +112,11 @@ var server = app.listen(process.env.PORT, () => {
   var host = server.address().address;
   var port = server.address().port;
 
-  domain = `http://${host}:${port}`;
+  if (process.env.ENV_VARIABLE == "production") {
+    domain = "blog.1will.com.br";
+  } else {
+    domain = `localhost:${port}`;
+  }
 
   console.log('Web server started at http://%s:%s', host, port);
 });

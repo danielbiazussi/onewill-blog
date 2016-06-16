@@ -5,6 +5,8 @@ const postsPath = __dirname + "/posts";
 const viewsPath = __dirname + "/public/views";
 const templatesPath = __dirname + "/public/templates";
 
+const imageRemote = "https://process.filestackapi.com/AV0jeucXSwuibGqPRbugyz";
+
 var renderTemplate = (filename) => {
   return fs.readFileSync(`${templatesPath}/${filename}`).toString();
 };
@@ -94,12 +96,9 @@ var parsePost = (post, slug) => {
 
   // Cover
   var reg = /\[cover\]([\s\S]*)\[\/cover\]/gm;
-  var cover = reg.exec(postString)[1]
-  if (/^https?:\/\/.*/.test(cover)) {
-    templateString = templateString.replace(/\{\{cover\}\}/gm, domain + cover);
-  } else {
-    templateString = templateString.replace(/\{\{cover\}\}/gm, `/${slug}/${reg.exec(postString)[1]}`);
-  }
+  var cover = reg.exec(postString)[1];
+  templateString = templateString.replace(/\{\{metaImage\}\}/gm, imageSmall(cover, slug));
+  templateString = templateString.replace(/\{\{cover\}\}/gm, imageLarge(cover, slug));
 
   // Text
   var reg = /\[text\]([\s\S]*)\[\/text\]/gm;
@@ -201,11 +200,7 @@ var parsePost = (post, slug) => {
   textParse = textParse.replace(reg, (image) => {
     var imageReg = /<image>([\s\S]*)<\/image>/gm;
     image = imageReg.exec(image)[1];
-    if (/^https?:\/\/.*/.test(image)) {
-      return renderTemplate("text_image.html").replace("$1", domain + image);
-    } else {
-      return renderTemplate("text_image.html").replace("$1", `/${slug}/${image}`);
-    }
+    return renderTemplate("text_image.html").replace("$1", imageMedium(image, slug));
   });
 
   // Append text
@@ -226,7 +221,7 @@ var parsePost = (post, slug) => {
   var postItem = Handlebars.compile(renderTemplate("post_item.hbs"))();
   postItem = postItem.replace("$1", votes)
                      .replace("$2", `post/${slug}`)
-                     .replace("$3", cover)
+                     .replace("$3", imageSmall(cover, slug))
                      .replace("$4", title)
                      .replace("$5", call);
 
@@ -234,7 +229,7 @@ var parsePost = (post, slug) => {
 
   var postItemRelated = renderTemplate("post_item_related.html");
   postItemRelated = postItemRelated.replace("$1", `post/${slug}`)
-                                   .replace("$2", cover)
+                                   .replace("$2", imageSmall(cover, slug))
                                    .replace("$3", title);
 
   fs.writeFile(`${postsPath}/${slug}/.cache/post_item_related_cache.html`, postItemRelated);
@@ -243,6 +238,38 @@ var parsePost = (post, slug) => {
     return { post: renderTemplate("post_zombie.html"), postItem: postItem, postItemRelated: postItemRelated };
   } else {
     return { post: templateString, postItem: postItem, postItemRelated: postItemRelated };
+  }
+}
+
+var imageLarge = (image, slug) => {
+  if (process.env.ENV_VARIABLE == "production") {
+    return `${imageRemote}/resize=width:2000,fit:max/output=compress:true,quality:99/${imageSrc(image)}`
+  } else {
+    return imageSrc(image, slug);
+  }
+}
+
+var imageMedium = (image, slug) => {
+  if (process.env.ENV_VARIABLE == "production") {
+    return `${imageRemote}/resize=width:1200,fit:max/output=compress:true,quality:99/${imageSrc(image)}`
+  } else {
+    return imageSrc(image, slug);
+  }
+}
+
+var imageSmall = (image, slug) => {
+  if (process.env.ENV_VARIABLE == "production") {
+    return `${imageRemote}/resize=width:800/sharpen=amount:1/${imageSrc(image)}`
+  } else {
+    return imageSrc(image, slug);
+  }
+}
+
+var imageSrc = (image, slug) => {
+  if (/^https?:\/\/.*/.test(image)) {
+    return `${image}`;
+  } else {
+    return `/${slug}/${image}`;
   }
 }
 
