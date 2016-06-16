@@ -61,7 +61,7 @@ This text is for section 2.
 
 ### Studies
 
-#### Table markup (<table>)
+#### Table markup (\<table\>)
 
 The table markup gets the following sintax:
 ```
