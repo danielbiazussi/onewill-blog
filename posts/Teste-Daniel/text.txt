@@ -11,7 +11,7 @@
 [call]Teste é uma coisa bem legal.[/call]
 
 ^ Defines the post image representation
-[cover][/cover]
+[cover]onibus.png[/cover]
 
 ^ Defines the main text
 ^ Use `#` to start a new section
