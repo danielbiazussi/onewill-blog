@@ -1,0 +1,37 @@
+^ Defines the publishing date
+[date]17/06/2016[/date]
+
+^ Defines the number of votes
+[votes]1490[/votes]
+
+^ Defines the title
+[title]Teste D[/title]
+
+^ Defines the excerpt
+[call]Teste é uma coisa bem legal.[/call]
+
+^ Defines the post image representation
+[cover][/cover]
+
+^ Defines the main text
+^ Use `#` to start a new section
+^ Use double breaklines to start new paragraphs
+^ Use `<image></image>` to add a image reference
+^ Use `<table></table>` to add the study reference
+
+[text]
+#Section 1
+
+This text is for section 1.
+
+This is a seconds paragraph because I break two lines.
+
+<image>http://www.itcanbe.an/imagem-url.jpg</image>
+
+#Section 2
+
+This text is for section 2.
+
+<table>^see table reference below</table>
+
+[/text]
